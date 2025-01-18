@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: gstx
+      POSTGRES_PASSWORD: teste123
+      POSTGRES_DB: teste
+    ports:
+      - "5432:5432"
+  
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://gstx:teste123@db:5432/teste
